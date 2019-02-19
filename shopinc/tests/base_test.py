@@ -28,3 +28,6 @@ class BaseTest(APITestCase):
 
     def update_product(self):
         return self.client.put(f"/api/products/{self.slug}", self.product)
+
+    def delete_product(self):
+        return self.client.delete(f"/api/products/{self.slug}")

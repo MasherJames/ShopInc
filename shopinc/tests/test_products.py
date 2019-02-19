@@ -43,3 +43,9 @@ class ProductTest(BaseTest):
     def test_update_product(self):
         res = self.update_product()
         self.assertEqual(res.status_code, status.HTTP_202_ACCEPTED)
+
+    def test_delete_product(self):
+        res = self.delete_product()
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.data['Message'],
+                         "Product deleted successfully")

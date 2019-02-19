@@ -62,4 +62,4 @@ class ProductRetrieve(generics.RetrieveUpdateDestroyAPIView):
             raise NotFound("Product with this slug does not exist")
 
         self.perform_destroy(product_to_destroy)
-        return Response("Product deleted successfully", status=status.HTTP_200_OK)
+        return Response({"Message": "Product deleted successfully"}, status=status.HTTP_200_OK)
