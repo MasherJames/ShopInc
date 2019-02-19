@@ -25,3 +25,17 @@ class ProductTest(BaseTest):
         res = self.create_product()
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         self.assertIn('name', res.data)
+
+    def test_get_products(self):
+        res = self.get_product()
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_get_one_product(self):
+        res = self.get_single_product()
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_get_nonexisting_product(self):
+        res = self.get_nonexisting_product()
+        self.assertEqual(res.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(res.data['detail'],
+                         "Product with this slug does not exist")

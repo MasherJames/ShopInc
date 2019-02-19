@@ -1,5 +1,6 @@
 import uuid
 from rest_framework import generics, status
+from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from django.template.defaultfilters import slugify
 
@@ -24,3 +25,18 @@ class ListCreateAPIView(generics.ListCreateAPIView):
         data = serializer.data
         data['message'] = "Your product was successfully created"
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class ProductRetrieve(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'slug'
+
+    def retrieve(self, request, slug):
+        try:
+            data = self.queryset.get(slug=slug)
+        except Product.DoesNotExist:
+            raise NotFound("Product with this slug does not exist")
+
+        serializer = self.serializer_class(data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
