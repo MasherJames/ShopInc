@@ -40,3 +40,17 @@ class ProductRetrieve(generics.RetrieveUpdateDestroyAPIView):
 
         serializer = self.serializer_class(data)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def update(self, request, slug):
+        try:
+            saved_product = self.queryset.get(slug=slug)
+        except Product.DoesNotExist:
+            raise NotFound("Product with this slug does not exist")
+
+        updated_prod_data = request.data
+
+        serializer = self.serializer_class(
+            saved_product, data=updated_prod_data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
