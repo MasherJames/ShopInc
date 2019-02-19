@@ -39,3 +39,7 @@ class ProductTest(BaseTest):
         self.assertEqual(res.status_code, status.HTTP_404_NOT_FOUND)
         self.assertEqual(res.data['detail'],
                          "Product with this slug does not exist")
+
+    def test_update_product(self):
+        res = self.update_product()
+        self.assertEqual(res.status_code, status.HTTP_202_ACCEPTED)

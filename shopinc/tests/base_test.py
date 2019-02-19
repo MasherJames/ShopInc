@@ -25,3 +25,6 @@ class BaseTest(APITestCase):
 
     def get_nonexisting_product(self):
         return self.client.get("/api/products/$%&*^(&&&&")
+
+    def update_product(self):
+        return self.client.put(f"/api/products/{self.slug}", self.product)
