@@ -49,3 +49,13 @@ class UserTest(BaseTest):
             res.data['Message'],
             "Incorrect password => 1 caps, digit and small"
         )
+
+    def test_login_user(self):
+        self.create_user()
+        res = self.login_user()
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+
+    def test_login_nonexisting_user(self):
+        data = {"email": "noemail@gmail.com", "password": "Validpass123"}
+        res = self.client.post("/api/login/", data)
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)

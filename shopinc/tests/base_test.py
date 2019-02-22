@@ -33,6 +33,11 @@ class BaseTest(APITestCase):
             "password": "#@$%$^"
         }
 
+        self.login_user_data = {
+            "email": "masher@gmail.com",
+            "password": "Password123"
+        }
+
         self.slug = dict(self.create_product().data)['slug']
 
     def create_product(self):
@@ -64,3 +69,6 @@ class BaseTest(APITestCase):
 
     def create_user_with_invalid_password(self):
         return self.client.post("/api/register/", self.invalid_password)
+
+    def login_user(self):
+        return self.client.post("/api/login/", self.login_user_data)
