@@ -26,7 +26,7 @@ def validate_registration(data):
 
     if not re.match("^[A-Za-z]+[\d\w_]{3,}", username):
         raise serializers.ValidationError({
-            "Username": "Username should start with a letter, can have digits or underscore and be > 3 chars"
+            "Message": "Username should start with a letter, can have digits or underscore and be > 3 chars"
         })
 
     if not re.match(
