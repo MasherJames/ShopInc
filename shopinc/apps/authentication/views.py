@@ -7,7 +7,7 @@ from rest_framework.permissions import (
 from .serializers import (
     RegisterSerializer, LoginSerializer, UserSerializer
 )
-from .valiadations import validate_registration
+from .valiadations import validate_registration, validate_login
 
 
 class RegistrationAPIView(generics.CreateAPIView):
@@ -23,3 +23,17 @@ class RegistrationAPIView(generics.CreateAPIView):
         serializer.save()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class LoginAPIView(generics.CreateAPIView):
+    permission_classes = (AllowAny,)
+    serializer_class = LoginSerializer
+
+    def post(self, request):
+        data = request.data
+        validate_login(data)
+
+        serializer = self.serializer_class(data=data)
+        serializer.is_valid(raise_exception=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)

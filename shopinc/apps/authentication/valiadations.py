@@ -39,3 +39,26 @@ def validate_registration(data):
         )
 
     return{"username": username, "email": email, "password": password}
+
+
+def validate_login(data):
+    email = data.get('email', None)
+    password = data.get('password', None)
+
+    if not re.match("^[^@]+@[^@]+\.[^@]+$", email):
+        raise serializers.ValidationError(
+            {
+                "Message": "Invalid email entered"
+            }
+        )
+
+    if not re.match(
+        "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9]{8,15}$", password
+    ):
+        raise serializers.ValidationError(
+            {
+                "Message": "Incorrect password => 1 caps, digit and small"
+            }
+        )
+
+    return{"email": email, "password": password}
