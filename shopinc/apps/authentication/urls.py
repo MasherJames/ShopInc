@@ -1,7 +1,12 @@
 from django.urls import path
-from .views import RegistrationAPIView, LoginAPIView
+from .views import (
+    RegistrationAPIView, LoginAPIView, PasswordResetAPIView,
+    PasswordUpdateAPIView
+)
 
 urlpatterns = [
-    path('register/', RegistrationAPIView.as_view()),
-    path('login/', LoginAPIView.as_view())
+    path('users/register/', RegistrationAPIView.as_view()),
+    path('users/login/', LoginAPIView.as_view()),
+    path('users/reset_password/', PasswordResetAPIView.as_view()),
+    path('users/update_password/<token>', PasswordUpdateAPIView.as_view())
 ]
