@@ -10,7 +10,8 @@ from rest_framework.permissions import (
 )
 from .models import User
 from .serializers import (
-    RegisterSerializer, LoginSerializer, UserSerializer, PasswordSerializer
+    RegisterSerializer, LoginSerializer, UserSerializer,
+    PasswordSerializer, SocialAuthenticationSerializer
 )
 from .valiadations import validate_registration, validate_login
 
@@ -128,3 +129,11 @@ class PasswordUpdateAPIView(generics.UpdateAPIView):
         except:
             return Response({"Message": "Password could not be reset"},
                             status=status.HTTP_400_BAD_REQUEST)
+
+
+class FaceBookAPIView(generics.CreateAPIView):
+    permission_classes = (AllowAny)
+    serializer_class = SocialAuthenticationSerializer
+
+    def post(self, request, *args, **kwargs):
+        

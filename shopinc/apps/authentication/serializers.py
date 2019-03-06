@@ -82,3 +82,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 class PasswordSerializer(serializers.Serializer):
     new_password = serializers.CharField(max_length=255, required=True)
+
+
+class SocialAuthenticationSerializer(serializers.Serializer):
+    access_token = serializers.CharField(
+        max_length=2000, required=True, trim_whitespace=True)
