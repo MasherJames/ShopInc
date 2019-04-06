@@ -129,11 +129,3 @@ class PasswordUpdateAPIView(generics.UpdateAPIView):
         except:
             return Response({"Message": "Password could not be reset"},
                             status=status.HTTP_400_BAD_REQUEST)
-
-
-class FaceBookAPIView(generics.CreateAPIView):
-    permission_classes = (AllowAny)
-    serializer_class = SocialAuthenticationSerializer
-
-    def post(self, request, *args, **kwargs):
-        
