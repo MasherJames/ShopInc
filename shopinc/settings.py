@@ -25,7 +25,7 @@ SECRET_KEY = '4x%hjq1f%m*+v=)d@ox66&*h*ox6n=dp8dq3qzxv=8(#t&vo6@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['shopinckk.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'shopinckk.herokuapp.com']
 
 
 # Application definition
@@ -122,6 +122,10 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'SHOPINC-BACKEND')
 
 AUTH_USER_MODEL = 'authentication.User'
 

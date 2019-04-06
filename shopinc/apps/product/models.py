@@ -8,7 +8,7 @@ class Product(models.Model):
     price = models.IntegerField(default=0)
     added_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
-    image_url = models.CharField(max_length=255, null=True)
+    image_url = models.ImageField(upload_to="images")
 
     def __str__(self):
         return self.name
