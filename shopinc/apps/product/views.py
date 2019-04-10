@@ -26,6 +26,12 @@ class ListCreateAPIView(generics.ListCreateAPIView):
         data['message'] = "Your product was successfully created"
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    def list(self, request):
+        serializer_data = self.get_queryset()
+        serializer = self.serializer_class(serializer_data, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class ProductRetrieve(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
