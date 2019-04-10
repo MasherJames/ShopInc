@@ -30,7 +30,7 @@ class ListCreateAPIView(generics.ListCreateAPIView):
         serializer_data = self.get_queryset()
         serializer = self.serializer_class(serializer_data, many=True)
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({'Products': serializer.data}, status=status.HTTP_200_OK)
 
 
 class ProductRetrieve(generics.RetrieveUpdateDestroyAPIView):
